@@ -15,33 +15,33 @@ const DatePicker1 = () => {
   const [divider, setDivider] = useState();
   const [isActiveOne, setIsActiveOne] = useState(false);
   const [isActiveTwo, setIsActiveTwo] = useState(false);
-  const [error, setError] = useState(false)
-  const [warning, setWarning] = useState(false)
-
-
-  
-
+  const [error, setError] = useState(false);
+  const [warning, setWarning] = useState(false);
 
   const handleElevenStyle = () => {
-    setError(false)
-    setIsActiveTwo(false)
+    setError(false);
+    setIsActiveTwo(false);
     setIsActiveOne(true);
     setDivider(11);
   };
   const handleTwentyTwoStyle = () => {
-    setError(false)
-    setIsActiveOne(false)
-    setIsActiveTwo(true)
+    setError(false);
+    setIsActiveOne(false);
+    setIsActiveTwo(true);
     setDivider(22);
-    
   };
-  
+
   const handleDate = () => {
     const datediff = secondvalue.$d - firstValue.$d;
-    const TotalDays = (Math.ceil(datediff / (1000 * 60 * 60 * 24) + 1));
-    if ((firstValue && secondvalue) !== null && (isActiveOne || isActiveTwo) === true && (secondvalue>firstValue) && (TotalDays>=divider)) {
-      setWarning(false)
-      setDays(TotalDays)
+    const TotalDays = Math.ceil(datediff / (1000 * 60 * 60 * 24) + 1);
+    if (
+      (firstValue && secondvalue) !== null &&
+      (isActiveOne || isActiveTwo) === true &&
+      secondvalue > firstValue &&
+      TotalDays >= divider
+    ) {
+      setWarning(false);
+      setDays(TotalDays);
       setEarnedLeave(
         Math.floor((datediff / (1000 * 60 * 60 * 24) + 1) / divider)
       );
@@ -50,19 +50,18 @@ const DatePicker1 = () => {
       );
     }
 
-    if((isActiveOne || isActiveTwo)!== true){
-      setError(true)
+    if ((isActiveOne || isActiveTwo) !== true) {
+      setError(true);
     }
-    if(secondvalue<=firstValue){
-      setWarning(true)
+    if (secondvalue <= firstValue) {
+      setWarning(true);
     }
-    if(TotalDays<divider){
-      setDays(0)
-      setWarning(true)
+    if (TotalDays < divider) {
+      setDays(0);
+      setWarning(true);
     }
-  
   };
- 
+
   return (
     <Container className="container">
       <div className="header">
@@ -73,7 +72,7 @@ const DatePicker1 = () => {
           variant="contained"
           sx={{ marginRight: "20px" }}
           onClick={handleElevenStyle}
-          className={(isActiveOne===true) ? 'buttonStyle' : null}
+          className={isActiveOne === true ? "buttonStyle" : null}
         >
           11 Day Calculator
         </Button>
@@ -81,7 +80,7 @@ const DatePicker1 = () => {
           variant="contained"
           sx={{ marginRight: "20px" }}
           onClick={handleTwentyTwoStyle}
-          className={(isActiveTwo===true) ? 'buttonStyle' : null}
+          className={isActiveTwo === true ? "buttonStyle" : null}
         >
           22 Day Calculator
         </Button>
@@ -113,18 +112,26 @@ const DatePicker1 = () => {
         </Button>
       </div>
       <div className="bottom">
-       {(days) !== null ? (
+        {days !== null ? (
           <div>
-            {warning!==true ?
-            <>
-            <h3>Total Days: {days} </h3>
-            <h3>Earned Leave: {earnedLeave}</h3>
-            <h3>Remaining Days: {remainingDays}</h3>
-            </> : <Typography variant="h6" sx={{color:"red"}}>Choose a proper date range!!</Typography>
-          }
+            {warning !== true ? (
+              <>
+                <h3>Total Days: {days} </h3>
+                <h3>Earned Leave: {earnedLeave}</h3>
+                <h3>Remaining Days: {remainingDays}</h3>
+              </>
+            ) : (
+              <Typography variant="h6" sx={{ color: "red" }}>
+                Choose a proper date range!!
+              </Typography>
+            )}
           </div>
-        ) :null}
-        {error===true ? <Typography variant="h6" sx={{color:"red"}}>Select a Calculator !!</Typography> : null}
+        ) : null}
+        {error === true ? (
+          <Typography variant="h6" sx={{ color: "red" }}>
+            Select a Calculator !!
+          </Typography>
+        ) : null}
       </div>
     </Container>
   );
