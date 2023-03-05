@@ -89,6 +89,7 @@ const DatePicker1 = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start Date"
+            inputFormat="DD/MM/YYYY"
             value={firstValue}
             onChange={(newValue) => {
               setFirstValue(newValue);
@@ -100,6 +101,7 @@ const DatePicker1 = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="End Date"
+            inputFormat="DD/MM/YYYY"
             value={secondvalue}
             onChange={(newValue) => {
               setSecondValue(newValue);
